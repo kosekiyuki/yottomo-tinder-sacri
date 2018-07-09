@@ -12,6 +12,9 @@
             <div>
                 <p>{!! link_to_route('users.show', 'View profile', ['id' => $user->id]) !!}</p>
             </div>
+            <div>
+                @include('user_like.like_button', ['user' => $user])
+            </div>
         </div>
     </li>
 @endforeach

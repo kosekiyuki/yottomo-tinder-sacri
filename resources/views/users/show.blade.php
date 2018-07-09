@@ -13,13 +13,15 @@
             </div>
             <!--like button-->
             @include('user_like.like_button', ['user' => $user])
+            <!--zuttomo button-->
+            @include('user_like.zuttomo_button', ['user' => $user])
         </aside>
         <div class="col-xs-8">
             <ul class="nav nav-tabs nav-justified">
                 <li><a href="#">MyProfile</a></li>
                 <li role="presentation" class="{{ Request::is('users/*/likings') ? 'active' : '' }}"><a href="{{ route('users.likings', ['id' => $user->id]) }}">Like <span class="badge"></span></a></li>
                 <li><a href="#">Future</a></li>
-                <li><a href="#">ズッ友</a></li>
+                <li role="presentation" class="{{ Request::is('users/*/zuttomoings') ? 'active' : '' }}"><a href="{{ route('users.zuttomoings', ['id' => $user->id]) }}">ズッ友 <span class="badge"></span></a></li>
             </ul>
         </div>
     </div>

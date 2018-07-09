@@ -26,12 +26,17 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
-    // like 
+
     Route::group(['prefix' => 'users/{id}'], function () {
-        Route::post('like', 'UserLikeController@store')->name('user.like');
-        Route::delete('unlike', 'UserLikeController@destroy')->name('user.unlike');
+        // like 
+        Route::post('like', 'UserLikeController@like')->name('user.like');
+        Route::delete('unlike', 'UserLikeController@unlike')->name('user.unlike');
         Route::get('likings', 'UsersController@likings')->name('users.likings');
         
+        // zuttomo
+        Route::post('zuttomo', 'UserLikeController@zuttomo')->name('user.zuttomo');
+        Route::delete('unzuttomo', 'UserLikeController@unzuttomo')->name('user.unzuttomo');
+        Route::get('zuttomoings', 'UsersController@zuttomoings')->name('users.zuttomoings');
     });
 
 });

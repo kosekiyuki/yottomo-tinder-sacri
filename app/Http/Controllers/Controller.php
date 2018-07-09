@@ -14,9 +14,11 @@ class Controller extends BaseController
     public function counts($user) {
         
         $count_likings = $user->likings()->count();
+        $count_zuttomoings = $user->zuttomoings()->count();
         
         return [
             'count_likings' => $count_likings,
+            'count_zuttomoings' => $count_zuttomoings,
         ];
     }
 }
