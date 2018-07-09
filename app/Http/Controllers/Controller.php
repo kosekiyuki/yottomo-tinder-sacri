@@ -10,4 +10,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    public function counts($user) {
+        
+        $count_likings = $user->likings()->count();
+        
+        return [
+            'count_likings' => $count_likings,
+        ];
+    }
 }

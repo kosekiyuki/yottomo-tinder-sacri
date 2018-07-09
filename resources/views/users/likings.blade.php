@@ -5,10 +5,10 @@
         <aside class="col-xs-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ $user->name }} ({{ $user->hometeam }},{{ $user->codingteam }})</h3>
+                    <h3 class="panel-title">{{ $user->name}} ({{ $user->hometeam }},{{ $user->codingteam }})</h3>
                 </div>
                 <div class="panel-body">
-                <img class="media-object img-rounded img-responsive" src="{{ Gravatar::src($user->name, 500) }}" alt="">
+                    <img class="media-object img-rounded img-responsive" src="{{ Gravatar::src($user->name, 500) }}" alt="">
                 </div>
             </div>
             <!--like button-->
@@ -17,10 +17,11 @@
         <div class="col-xs-8">
             <ul class="nav nav-tabs nav-justified">
                 <li><a href="#">MyProfile</a></li>
-                <li role="presentation" class="{{ Request::is('users/*/likings') ? 'active' : '' }}"><a href="{{ route('users.likings', ['id' => $user->id]) }}">Like <span class="badge"></span></a></li>
+                <li role="presentation" class="{{ Request::is('users/*/likings') ? 'active' : '' }}"><a href="{{ route('users.likings', ['id' => $user->id]) }}">Like <span class="badge">{{ $count_likings }}</span></a></li>
                 <li><a href="#">Future</a></li>
                 <li><a href="#">ズッ友</a></li>
             </ul>
+            @include('users.users', ['users' => $users])
         </div>
     </div>
 @endsection

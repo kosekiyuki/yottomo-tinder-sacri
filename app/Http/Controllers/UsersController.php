@@ -25,4 +25,21 @@ class UsersController extends Controller
             'user' => $user,
         ]);
     }
+    
+    // like
+    public function likings($id)
+    {
+        $user = User::find($id);
+        $likings = $user->likings()->paginate(30);
+
+        $data = [
+            'user' => $user,
+            'users' => $likings,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.likings', $data);
+        
+    }
 }
