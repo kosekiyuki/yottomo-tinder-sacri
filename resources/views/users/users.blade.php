@@ -14,6 +14,7 @@
             </div>
             <div>
                 @include('user_like.like_button', ['user' => $user])
+                @include('user_like.zuttomo_button', ['user' => $user])
             </div>
         </div>
     </li>
