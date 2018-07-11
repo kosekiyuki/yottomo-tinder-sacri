@@ -39,18 +39,35 @@ class User extends Authenticatable
     public function like($userId)
     {
         // confirm if already liking
-        $exist = $this->is_liking($userId);
+        $exist_l = $this->is_liking($userId);
+        $exist_z = $this->is_zuttomoing($userId);
         // confirming that it is not you
         $its_me = $this->id == $userId;
-    
-        if ($exist || $its_me) {
-            // do nothing if already liking
+        
+        if($exist_l || $its_me) {
+            // do nothing
+            return false;
+        } elseif($exist_z) {
+            $this->zuttomoings()->detach($userId);
+            $this->likings()->attach($userId);
+            return true;
+        } elseif($exist_l && $exist_z) {
+            // do nothing
             return false;
         } else {
-            // like if not liking
+            // do "want"
             $this->likings()->attach($userId);
             return true;
         }
+    
+        // if ($exist_l || $its_me) {
+        //     // do nothing if already liking
+        //     return false;
+        // } else {
+        //     // like if not liking
+        //     $this->likings()->attach($userId);
+        //     return true;
+        // }
     }
     
     public function unlike($userId)
@@ -85,18 +102,35 @@ class User extends Authenticatable
     public function zuttomo($userId)
     {
         // confirm if already zuttomoing
-        $exist = $this->is_zuttomoing($userId);
+        $exist_l = $this->is_liking($userId);
+        $exist_z = $this->is_zuttomoing($userId);
         // confirming that it is not you
         $its_me = $this->id == $userId;
-    
-        if ($exist || $its_me) {
-            // do nothing if already zuttomoing
+        
+        if($exist_z || $its_me) {
+            // do nothing
+            return false;
+        } elseif($exist_l) {
+            $this->likings()->detach($userId);
+            $this->zuttomoings()->attach($userId);
+            return true;
+        } elseif($exist_l && $exist_z) {
+            // do nothing
             return false;
         } else {
-            // follow if not zuttomoing
+            // do "want"
             $this->zuttomoings()->attach($userId);
             return true;
         }
+    
+        // if ($exist || $its_me) {
+        //     // do nothing if already zuttomoing
+        //     return false;
+        // } else {
+        //     // follow if not zuttomoing
+        //     $this->zuttomoings()->attach($userId);
+        //     return true;
+        // }
     }
     
     public function unzuttomo($userId)

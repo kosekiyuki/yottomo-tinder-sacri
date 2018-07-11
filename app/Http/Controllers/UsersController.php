@@ -20,10 +20,22 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        $likings = $user->likings()->paginate(30);
+        $zuttomoings = $user->zuttomoings()->paginate(30);
 
-        return view('users.show', [
+        $data = [
             'user' => $user,
-        ]);
+            'users' => $likings,
+            'users' => $zuttomoings,
+            
+        ];
+
+        $data += $this->counts($user); 
+
+        return view('users.show', $data);
+        // [
+        //     'user' => $user,
+        // ]);
     }
     
     // like

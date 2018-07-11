@@ -21,7 +21,7 @@
                 <li><a href="#">MyProfile</a></li>
                 <li role="presentation" class="{{ Request::is('users/*/likings') ? 'active' : '' }}"><a href="{{ route('users.likings', ['id' => $user->id]) }}">Like <span class="badge">{{ $count_likings }}</span></a></li>
                 <li><a href="#">Future</a></li>
-                <li role="presentation" class="{{ Request::is('users/*/zuttomoings') ? 'active' : '' }}"><a href="{{ route('users.zuttomoings', ['id' => $user->id]) }}">ズッ友 <span class="badge"></span></a></li>
+                <li role="presentation" class="{{ Request::is('users/*/zuttomoings') ? 'active' : '' }}"><a href="{{ route('users.zuttomoings', ['id' => $user->id]) }}">ズッ友 <span class="badge">{{ $count_zuttomoings }}</span></a></li>
             </ul>
             @include('users.users', ['users' => $users])
         </div>
